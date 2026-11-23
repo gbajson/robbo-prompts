@@ -1,0 +1,41 @@
+# What Robbo can do on facebook.com. Each ability is a goal of the regression
+# set of Robbo (scripts/regress.py): it passes when the run of `goal` ends
+# done and `expect` (a Python regex) matches the answer of `verify` (or of
+# `goal` when there is no `verify`). `undo` runs after it, so that the next
+# batch starts from the same state. {{name}} comes from ROBBO_REGRESS_<NAME>
+# (.env of Robbo); an ability whose value is not set is skipped.
+#
+# fb_profile: the address of the profile of the test account, whose login is
+# in the vault of the user that runs the batch (ROBBO_REGRESS_USER). Its last
+# post must be public and the account's own: Robbo likes and comments on it.
+
+- id: fb.like
+  ability: Like a post
+  login: true
+  goal: On Facebook open {{fb_profile}} and like its latest post.
+  verify: >
+    On Facebook open {{fb_profile}} and tell me whether its latest post is
+    liked by me. Answer only "yes" or "no".
+  expect: '(?i)^\W*yes\b'
+  undo: On Facebook open {{fb_profile}} and remove my like from its latest post.
+
+- id: fb.comment
+  ability: Write a comment under a post
+  login: true
+  goal: >
+    On Facebook open {{fb_profile}} and write the comment
+    "Robbo regression test" under its latest post.
+  verify: >
+    On Facebook open {{fb_profile}}, open the comments of its latest post and
+    tell me whether one of them is "Robbo regression test" written by me.
+    Answer only "yes" or "no".
+  expect: '(?i)^\W*yes\b'
+  undo: >
+    On Facebook open {{fb_profile}} and delete my comment
+    "Robbo regression test" under its latest post.
+
+- id: fb.post-url
+  ability: Copy the address of a post
+  login: true
+  goal: On Facebook open {{fb_profile}} and tell me the address (URL) of its latest post.
+  expect: 'facebook\.com/(\S+/posts/|permalink\.php|story\.php|\S*story_fbid=)'
