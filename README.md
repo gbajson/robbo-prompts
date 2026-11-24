@@ -4,7 +4,7 @@ The prompts and the site notes of [Robbo](https://github.com/gbajson/robbo), the
 
 - `prompts/`: `system.md` (how Robbo works: what the agent sees, the actions), `planner.md` (splits a goal into stages and writes the guidance), `reader.md`, `judge.md`, `answer.md`, and `user.md` (a Go `text/template` of each screen's request).
 - `sites/<domain>/`: everything about one site, in one directory named after one of its domains (a site with several domains, facebook.com and fb.com, has one directory):
-  - `notes.md`: notes about the site. The first line is `domains: facebook.com, fb.com` (all its registrable domains, the directory's name among them), the rest are the notes, at most 3000 bytes. Only screens whose page is on one of the domains get them.
+  - `notes.md`: notes about the site. The first line is `domains: facebook.com, fb.com` (all its registrable domains, the directory's name among them), the rest are the notes, at most 10000 bytes. Only screens whose page is on one of the domains get them.
   - `abilities.yaml`: what Robbo can do on the site (like a post, write a comment), each ability a goal of Robbo's regression set (`just regress`), with the check of its result and the step that undoes it. The comment at the top of the file says how they are run.
 
 ## Abilities
