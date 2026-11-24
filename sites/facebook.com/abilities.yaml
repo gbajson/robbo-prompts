@@ -5,11 +5,14 @@
 # batch starts from the same state. {{name}} comes from ROBBO_REGRESS_<NAME>
 # (.env of Robbo); an ability whose value is not set is skipped.
 #
+# The id is <site>.<verb>-<object> (README.md, "Abilities"): get- only reads
+# and answers; any other verb changes the site and needs undo.
+#
 # fb_profile: the address of the profile of the test account, whose login is
 # in the vault of the user that runs the batch (ROBBO_REGRESS_USER). Its last
 # post must be public and the account's own: Robbo likes and comments on it.
 
-- id: fb.like
+- id: facebook.like-post
   ability: Like a post
   login: true
   goal: On Facebook open {{fb_profile}} and like its latest post.
@@ -19,7 +22,7 @@
   expect: '(?i)^\W*yes\b'
   undo: On Facebook open {{fb_profile}} and remove my like from its latest post.
 
-- id: fb.comment
+- id: facebook.write-comment
   ability: Write a comment under a post
   login: true
   goal: >
@@ -34,8 +37,27 @@
     On Facebook open {{fb_profile}} and delete my comment
     "Robbo regression test" under its latest post.
 
-- id: fb.post-url
+- id: facebook.get-post-url
   ability: Copy the address of a post
   login: true
   goal: On Facebook open {{fb_profile}} and tell me the address (URL) of its latest post.
   expect: 'facebook\.com/(\S+/posts/|permalink\.php|story\.php|\S*story_fbid=)'
+
+- id: facebook.get-comments
+  ability: List the comments of a post
+  login: true
+  # post_url (ROBBO_REGRESS_POST_URL, no default: unset, the ability is
+  # skipped): the address of a post with comments; order: how Facebook sorts
+  # the comments (the menu above them, "Most relevant" at first); count: how
+  # many comments to list
+  options:
+    order: [All comments, Most relevant, Newest]
+    count: 10
+  goal: >
+    Get the comments of the Facebook post {{post_url}}: sort them by "{{order}}"
+    and answer with the list of the first {{count}} comments, one comment per
+    line as "author: text". If no comments could be seen, answer only "none".
+  # at least 3 lines "author: text" one after another
+  expect: '(?m)(?:^.*\S: .*\S\n){2}^.*\S: .*\S'
+  timeout: 1200
+  long: true
