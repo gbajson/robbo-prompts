@@ -13,6 +13,9 @@ Done so far (oldest first):
 {{.History}}
 
 Firefox window title now: {{.Title}}
+{{- if .Address}}
+Page address now: {{.Address}}
+{{- end}}
 {{- if .Page}}
 Page scrolled: {{.Page}}
 {{- end}}
