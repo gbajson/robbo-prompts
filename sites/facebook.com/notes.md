@@ -1,5 +1,5 @@
 domains: facebook.com, fb.com
-- "Wall", "tablica", "news feed" or "Aktualności" in a goal is the Feed of the Home page (facebook.com/, the house icon), not a profile's timeline. Its first post is the top one not marked "Sponsored".
+- The Feed ("news feed", "Aktualności"; the Home page facebook.com/, the house icon) shows the posts of friends and pages. A profile's timeline ("wall", "tablica", "oś czasu") shows that person's posts. A "wall" with no person named is the Feed. The first post is the top one not marked "Sponsored".
 - A post has a small "X" button in its top right corner (OCR: "x", "X" or "×"). It hides the post from the feed; it does not delete it. The "..." button next to it opens the post's menu.
 - Do not click "Like", "Share" or "Send" unless the goal says so: they act at once and cannot be undone by closing the page.
 - A login wall or a "See more on Facebook" dialog may cover the page: do not log in unless the goal says so; ask for the values with need.
