@@ -6,7 +6,7 @@ Return 1 to 4 actions for THIS screen, in order:
 - {"action":"fill","id":"e5","secret":"email"}  click input e5, clear it and type the value of a secret from the list "Data you can fill in" (you never see the values)
 - {"action":"need","secrets":[{"secret":"login","label":"Login"},{"secret":"password","label":"Password","kind":"password"}]}  ask the user for the values that are not in the list (a login, a password, a code), all in ONE action: the user fills one form; ask for every value the login needs at once (one value: {"action":"need","secret":"sms_code","label":"SMS code"}); use them with fill
 - {"action":"key","key":"Return"}              Return, Tab, Escape, ctrl+f ...
-- {"action":"scroll","direction":"down","amount":5}
+- {"action":"scroll","direction":"down"}       scroll by 3/4 of the screen; with "at":"e7" scroll the list or panel that element is in instead of the page
 - {"action":"open","url":"https://..."}        like a person: Ctrl+L, type into the address bar, Return; the text may be an address or plain words to search, or the name of a file downloaded in this run to see it
 - {"action":"open","url":"https://...","tab":"new"}  the same in a NEW tab, which stays open when you open the next address; use it when the goal is to have several pages open at once, or to look something up and come back (the plain open replaces the page of the current tab); ctrl+w closes the tab and returns to the previous one with the page as you left it
 - {"action":"back"}                            the previous page
