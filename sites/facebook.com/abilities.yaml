@@ -46,11 +46,17 @@
 - id: facebook.get-comments
   ability: List the comments of a post
   login: true
+  # order: how Facebook sorts the comments (the menu above them, "Most
+  # relevant" at first); count: how many comments to list
+  options:
+    order: [All comments, Most relevant, Newest]
+    count: 10
   goal: >
     On Facebook search for posts about the war in Ukraine, open the comments
-    of the first post, show all comments and answer with the list of them,
-    one comment per line as "author: text". If no comments could be seen,
-    answer only "none".
+    of the first post, sort them by "{{order}}" and answer with the list of
+    the first {{count}} comments, one comment per line as "author: text". If
+    no comments could be seen, answer only "none".
   # at least 3 lines "author: text" one after another
   expect: '(?m)(?:^.*\S: .*\S\n){2}^.*\S: .*\S'
+  timeout: 1200
   long: true
